@@ -29,6 +29,15 @@ using namespace std;
 
 class Solution {
  public:
+  /**
+   1. 先排序
+   2. 确定low和pos的最小和最大位置为1和nums.size() -1
+   3. 遍历第三个数a，如果 a + nums[high] + nums[high] == 0,得解,并开始去重
+   4. 如果 a + nums[high] + nums[high] < 0, low++
+   5. 如果 a + nums[high] + nums[high] > 0, high--
+   6, 对于第三个数a进行去重
+   算法复杂度：O(n^2)
+**/
   vector<vector<int>> threeSum(vector<int>& nums) {
     vector<vector<int>> result;
     sort(nums.begin(), nums.end());
