@@ -150,4 +150,5 @@ int main() {
   for (auto it = result; it != nullptr; it = it->next) {
     cout << it->val << " ";
   }
+  return 0;
 }
