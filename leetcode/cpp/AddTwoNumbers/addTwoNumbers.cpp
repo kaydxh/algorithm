@@ -35,6 +35,19 @@ struct ListNode {
 };
 class Solution {
  public:
+  /*
+      1. 新建一个值为-1的ListNode* result（亚节点），result->next 记为头指针
+      2. 两个链表逐一 相加，和为2个链表的val相加， 再加上进位carry
+      3. 将相加之和保存到新建节点中，直到两个链表都为空。
+      4. 如果一个链表为空另一个不为空，可以令为空的链表的val为0，一直处理
+      5. 不能使用先把2个链表全部相加，再把结果存入result
+  ListNode，因为如果原链表数据比较大，会导致相加后，超出整数范围
+    复杂度分析:
+  时间复杂度：O(\max(m, n))O(max(m,n))，假设 mm 和 nn 分别表示 l1l1 和 l2l2
+  的长度，上面的算法最多重复 \max(m, n)max(m,n) 次。
+  空间复杂度：O(\max(m, n))O(max(m,n))， 新列表的长度最多为 \max(m,n) +
+  1max(m,n)+1。
+  */
   ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
     ListNode* result = new ListNode(-1);
     if (nullptr == result) {
