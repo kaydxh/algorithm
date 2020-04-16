@@ -52,7 +52,7 @@ class Solution {
 */
   int reverse(int x) {
     int result = 0;
-    for (auto i = 0; x > 0; ++i) {
+    while (x > 0) {
       int n = x % 10;
       if (result > INT_MAX / 10 &&
           (result == INT_MAX / 10 && n > INT_MAX % 10)) {
