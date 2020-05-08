@@ -83,7 +83,7 @@ class Solution {
       }
     }
 
-    if (right <= 0 || nums[right] != target) {
+    if (right < 0 || nums[right] != target) {
       return -1;
     }
 
