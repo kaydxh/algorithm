@@ -31,6 +31,50 @@ using namespace std;
 
 class Solution {
  public:
+  /*
+  1.递归
+
+  2. 动态规划
+  递归就是压栈压栈压栈，出栈出栈出栈的过程，我们可以利用动态规划的思想，省略压栈的过程，直接从
+  bottom 到 top。
+
+  用一个 dp 数组， dp [ i ] 代表字符串 s [ i, s.len-1 ]，也就是 s 从 i
+  开始到结尾的字符串的解码方式。
+
+  这样和递归完全一样的递推式。
+
+  如果 s [ i ] 和 s [ i + 1 ] 组成的数字小于等于 26，那么
+
+  dp [ i ] = dp[ i + 1 ] + dp [ i + 2 ]
+*/
+
+  int numDecodings(string s) {
+    int dp[3] = {0};
+    dp[s.length() % 3] = 1;
+    if (s[s.length() - 1] != '0') {
+      dp[(s.length() - 1) % 3] = 1;
+    }
+
+    for (int i = s.length() - 2; i >= 0; --i) {
+      if (s[i] == '0') {
+        dp[i % 3] = 0;
+        continue;
+      }
+
+      int count1 = dp[(i + 1) % 3];
+      int count2 = 0;
+      int ten = (s[i] - '0') * 10;
+      int one = s[i + 1] - '0';
+      if (ten + one <= 26) {
+        count2 = dp[(i + 2) % 3];
+      }
+
+      dp[i % 3] = count1 + count2;
+    }
+
+    return dp[0];
+  }
+#if 0
   int numDecodings(string s) { return numDecode(s, 0); }
 
   int numDecode(string s, int index) {
@@ -55,6 +99,7 @@ class Solution {
 
     return count1 + count2;
   }
+#endif
 };
 
 int main() {
