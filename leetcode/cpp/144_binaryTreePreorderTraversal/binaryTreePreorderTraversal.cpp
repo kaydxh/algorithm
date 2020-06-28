@@ -40,11 +40,12 @@ class Solution {
         result.push_back(node->val);
         nodes_stack.push(node);
         node = node->left;
-      }
 
-      node = nodes_stack.top();
-      nodes_stack.pop();
-      node = node->right;
+      } else {
+        node = nodes_stack.top();
+        nodes_stack.pop();
+        node = node->right;
+      }
     }
 
     return result;
