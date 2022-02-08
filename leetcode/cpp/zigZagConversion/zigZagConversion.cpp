@@ -73,7 +73,7 @@ class Solution {
     }
 
     for (auto i = 0; i < row_strings.size(); ++i) {
-      result += row_strings[0];
+      result += row_strings[i];
     }
 
     return result;
