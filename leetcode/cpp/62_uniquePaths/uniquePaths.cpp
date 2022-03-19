@@ -66,10 +66,23 @@ class Solution {
 
         return dp[m - 1][n - 1];
     }
+
+    //使用一维数组节省空间,将自身与前一个相加，重复利用计算结果
+    int uniquePaths2(int m, int n) {
+        vector<int> dp(n, 1);
+
+        for (int i = 1; i < m; ++i) {
+            for (int j = 1; j < n; ++j) {
+                dp[j] += dp[j - 1];
+            }
+        }
+
+        return dp[n - 1];
+    }
 };
 
 int main() {
     Solution sol;
-    auto result = sol.uniquePaths(7, 3);
+    auto result = sol.uniquePaths2(7, 3);
     cout << result << endl;
 }
