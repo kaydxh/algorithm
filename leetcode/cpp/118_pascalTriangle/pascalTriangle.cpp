@@ -78,11 +78,24 @@ class Solution {
 
         return result;
     }
+    //空间优化，复用数组
+    vector<vector<int>> generate2(int numRows) {
+        vector<vector<int>> result(numRows);
+        for (int i = 0; i < numRows; ++i) {
+            result[i].resize(i + 1);
+            result[i][0] = result[i][i] = 1;
+            for (int j = 0; j < i; ++j) {
+                result[i][j] = result[i - 1][j] + result[i - 1][j - 1];
+            }
+        }
+
+        return result;
+    }
 };
 
 int main() {
     Solution sol;
-    auto result = sol.generate(5);
+    auto result = sol.generate2(5);
     for (int i = 0; i < result.size(); ++i) {
         for (int j = 0; j < result[i].size(); ++j) {
             std::cout << result[i][j] << " ";
