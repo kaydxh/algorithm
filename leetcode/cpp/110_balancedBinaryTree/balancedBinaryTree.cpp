@@ -42,54 +42,78 @@ Return false
 using namespace std;
 
 struct TreeNode {
-  int val;
-  TreeNode *left;
-  TreeNode *right;
-  TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
 class Solution {
- public:
-  bool isBalanced(TreeNode *root) {
-    if (nullptr == root) {
-      return true;
+   public:
+    bool isBalanced(TreeNode *root) { return isBalancedHelp(root); }
+
+    bool isBalancedHelp(TreeNode *root) {
+        if (root == nullptr) {
+            return true;
+        }
+
+        int h1 = getTreeHeight(root->left);
+        int h2 = getTreeHeight(root->right);
+        if (abs(h1 - h2) > 1) {
+            return false;
+        }
+
+        return isBalancedHelp(root->left) && isBalancedHelp(root->right);
     }
 
-    int left_height = getTreeHeight(root->left);
-    int right_height = getTreeHeight(root->right);
-    if (abs(left_height - right_height) > 1) {
-      return false;
+    int getTreeHeight(TreeNode *root) {
+        if (nullptr == root) {
+            return 0;
+        }
+        return 1 + max(getTreeHeight(root->left), getTreeHeight(root->right));
+    }
+    /*
+    bool isBalanced(TreeNode *root) {
+      if (nullptr == root) {
+        return true;
+      }
+
+      int left_height = getTreeHeight(root->left);
+      int right_height = getTreeHeight(root->right);
+      if (abs(left_height - right_height) > 1) {
+        return false;
+      }
+
+      return isBalanced(root->left) && isBalanced(root->right);
     }
 
-    return isBalanced(root->left) && isBalanced(root->right);
-  }
+    int getTreeHeight(TreeNode *root) {
+      if (nullptr == root) {
+        return 0;
+      }
 
-  int getTreeHeight(TreeNode *root) {
-    if (nullptr == root) {
-      return 0;
+      int left_height = getTreeHeight(root->left);
+      int right_height = getTreeHeight(root->right);
+
+      return left_height > right_height ? left_height + 1 : right_height + 1;
     }
-
-    int left_height = getTreeHeight(root->left);
-    int right_height = getTreeHeight(root->right);
-
-    return left_height > right_height ? left_height + 1 : right_height + 1;
-  }
+    */
 };
 
 int main() {
-  TreeNode *p1 = new TreeNode(3);
-  TreeNode *p2 = new TreeNode(9);
-  TreeNode *p3 = new TreeNode(20);
-  TreeNode *p4 = new TreeNode(15);
-  TreeNode *p5 = new TreeNode(7);
+    TreeNode *p1 = new TreeNode(3);
+    TreeNode *p2 = new TreeNode(9);
+    TreeNode *p3 = new TreeNode(20);
+    TreeNode *p4 = new TreeNode(15);
+    TreeNode *p5 = new TreeNode(7);
 
-  p1->left = p2;
-  p1->right = p3;
-  p3->left = p4;
-  p3->right = p5;
+    p1->left = p2;
+    p1->right = p3;
+    p3->left = p4;
+    p3->right = p5;
 
-  Solution sol;
-  auto result = sol.isBalanced(p1);
+    Solution sol;
+    auto result = sol.isBalanced(p1);
 
-  cout << result << endl;
+    cout << result << endl;
 }
