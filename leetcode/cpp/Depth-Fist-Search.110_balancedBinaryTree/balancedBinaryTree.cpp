@@ -50,8 +50,34 @@ struct TreeNode {
 
 class Solution {
    public:
-    bool isBalanced(TreeNode *root) { return isBalancedHelp(root); }
+    bool isBalanced(TreeNode *root) {
+        // return isBalancedHelp(root);
+        return getTreeHeight2(root) >= 0;
+    }
 
+    /*
+     * 递归： 自底向上递归，单层递归，避免节点的高度重复计算
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(n)
+     */
+    int getTreeHeight2(TreeNode *root) {
+        if (nullptr == root) {
+            return 0;
+        }
+        int h1 = getTreeHeight2(root->left);
+        int h2 = getTreeHeight2(root->right);
+        // 非平衡时，高度返回-1
+        if (h1 == -1 || h2 == -1 || abs(h1 - h2) > 1) {
+            return -1;
+        }
+        return 1 + max(h1, h2);
+    }
+
+    /*
+     * 递归： 自顶向下递归，双层递归，节点的高度有重复计算
+     * 时间复杂度：O(n^2)
+     * 空间复杂度：O(n)
+     */
     bool isBalancedHelp(TreeNode *root) {
         if (root == nullptr) {
             return true;
@@ -72,32 +98,6 @@ class Solution {
         }
         return 1 + max(getTreeHeight(root->left), getTreeHeight(root->right));
     }
-    /*
-    bool isBalanced(TreeNode *root) {
-      if (nullptr == root) {
-        return true;
-      }
-
-      int left_height = getTreeHeight(root->left);
-      int right_height = getTreeHeight(root->right);
-      if (abs(left_height - right_height) > 1) {
-        return false;
-      }
-
-      return isBalanced(root->left) && isBalanced(root->right);
-    }
-
-    int getTreeHeight(TreeNode *root) {
-      if (nullptr == root) {
-        return 0;
-      }
-
-      int left_height = getTreeHeight(root->left);
-      int right_height = getTreeHeight(root->right);
-
-      return left_height > right_height ? left_height + 1 : right_height + 1;
-    }
-    */
 };
 
 int main() {
