@@ -9,7 +9,7 @@
 #include <string>
 using namespace std;
 
-int RecursionHelp(std::map<int, int> &cache, int n) {
+int memorizationHelp(std::map<int, int> &cache, int n) {
     auto iter = cache.find(n);
     if (iter != cache.end()) {
         return iter->second;
@@ -23,18 +23,18 @@ int RecursionHelp(std::map<int, int> &cache, int n) {
       }
 
     //2. recursion relation
-     result = RecursionHelp(cache, n - 1) + RecursionHelp(cache, n - 2);
+     result =  memorizationHelp(cache, n - 1) + memorizationHelp(cache, n - 2);
     */
     cache[n] = result;
     return result;
 }
 
-int Recursiop(int n) {
+int memorization(int n) {
     std::map<int, int> cache;
-    return RescursionHelp(cache, n);
+    return memorizationHelp(cache, n);
 }
 
 int main() {
     int n = 4;
-    std::cout << Recursiop(4) << std::endl;
+    std::cout << memorization(4) << std::endl;
 }
