@@ -17,7 +17,7 @@ void swap(int &a, int &b) {
     b = tmp;
 }
 
-void precolateDown(int *a, int len, int parent) {
+void percolateDown(int *a, int len, int parent) {
     int child = 2 * parent + 1;
     while (child < len) {
         //左孩子小于右孩子，就child++，得到右孩子索引
@@ -43,9 +43,10 @@ void precolateDown(int *a, int len, int parent) {
 
 //最大堆
 void buildHeap(int *a, int n) {
-    //从n-2开始，父节点最大为n-2（n的节点，最大节点为n-1，最大父节点为n-2）
+    //从n-2开始，父节点最大为n-2（n的节点，最大节点为n-1，最大父节点为n-2),
+    // n-1最后一个节点必然是叶子节点，最后一个叶子节点无需主动判断，由它的父节点判断调整后，自然就跟随调整了
     for (int i = n - 2; i >= 0; --i) {
-        precolateDown(a, n, i);
+        percolateDown(a, n, i);
     }
 }
 
@@ -55,7 +56,7 @@ void heapSort(int *a, int n) {
     int end = n - 1;
     while (end > 0) {
         ::swap(a[0], a[end]);
-        precolateDown(a, end, 0);
+        percolateDown(a, end, 0);
         --end;
     }
 }
