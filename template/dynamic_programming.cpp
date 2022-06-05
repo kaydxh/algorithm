@@ -14,6 +14,8 @@
  * 5. 遍历迭代
  *  for (int i = 1; i < nums.size(); ++i) {
  *   //根据状态方式写逻辑
+ *   // 一般组合问题，需要嵌套循环, 例如整数分割，
+ *    for (int j = 0; j < i; ++j)
  *
  *  }
  *   return dp[nums.size()-] - 1
@@ -23,6 +25,16 @@
 #include <vector>
 using namespace std;
 
+/*
+ * https://leetcode.cn/problems/jump-game-ii/
+ * 1. dp[i] 表示到i位置至少需要多少跳, curPos为当前位置，初始值为0
+ * 2. 如果cur_pos位置中，最大跳跃距离>= i -  curpos, 就更新dp[i] =
+ *    dp[cur_pos] + 1
+ * 3. 否则，需要移动curpos， 对下一个cur_pos，在判断能否达到i -
+ *    cur_pos位置（注意这里i不需要增加）
+ *  时间复杂度O(n)
+ *  空间复杂度O(n)
+ */
 int dynamic(vector<int> &nums) {
     int curPos = 0;
     vector<int> dp(nums.size());
@@ -39,8 +51,11 @@ int dynamic(vector<int> &nums) {
 }
 
 /*
+ * https://leetcode.cn/problems/partition-equal-subset-sum/solution/fen-ge-deng-he-zi-ji-by-leetcode-solution/
  * 选与不选问题
- * dp[i][j]
+ * dp[i][j],表示从位置0-i，是否能够组合为和为j
+ * 如果不选取 nums[i], dp[i][j]=dp[i−1][j]
+ * 如果选取 nums[i], dp[i][j]=dp[i−1][j - nums[i]],   (j - nums[i] >= 0)
  */
 bool partition(vector<int> &nums, int target) {
     if (nums.empty()) {
@@ -68,4 +83,31 @@ bool partition(vector<int> &nums, int target) {
     }
 
     return dp[nums.size() - 1][target];
+}
+
+/*
+ * https://leetcode.cn/problems/integer-break/
+ * dp[i] 表示：整数i，拆分后的整数(至少2个)最大乘积
+ * (i -j) * j，将整数i拆分为i-j 和j, 不再继续拆分
+ * dp[i - j] * j, 将整数拆分为i-j 和j, i-j将继续拆分
+ * dp[i] = max(dp[i], max(dp[i - j] * j, (i - j) * j));
+ * 时间复杂度：O(n^2)
+ * 空间复杂度：O(n)
+ */
+int integerBreak(int n) {
+    vector<int> dp(n + 1);
+    if (n < 2) {
+        return n;
+    }
+
+    dp[2] = 1;
+    for (int i = 3; i <= n; ++i) {
+        for (int j = 1; j < i; ++j) {
+            // (i -j) * j，将整数i拆分为i-j 和j, 不再继续拆分
+            //  dp[i - j] * j, 将整数拆分为i-j 和j, i-j将继续拆分
+            dp[i] = max(dp[i], max(dp[i - j] * j, (i - j) * j));
+        }
+    }
+
+    return dp[n];
 }
