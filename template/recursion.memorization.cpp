@@ -25,6 +25,7 @@ int memorizationHelp(std::map<int, int> &cache, int n) {
     //2. recursion relation
      result =  memorizationHelp(cache, n - 1) + memorizationHelp(cache, n - 2);
     */
+    // 3. update cache
     cache[n] = result;
     return result;
 }

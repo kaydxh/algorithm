@@ -32,7 +32,7 @@ bool DivideAndConquerHelp(TreeNode* root) {
       }
       // 拆成小问题
      bool r1 =  DivideAndConquerHelp(root->left)
-     bool r22 = DivideAndConquerHelp(root->right);
+     bool r2 = DivideAndConquerHelp(root->right);
 
     */
 
