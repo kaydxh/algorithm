@@ -61,7 +61,9 @@ class Solution {
             return true;
         }
 
+        // 类似push_back, 先代入
         visited[i][j] = true;
+        // 上、下、左，右
         vector<pair<int, int>> directions = {{0, -1}, {0, 1}, {-1, 0}, {1, 0}};
 
         bool result = false;
@@ -81,6 +83,7 @@ class Solution {
                 }
             }
         }
+        // 类似pop() 复原
         visited[i][j] = false;
         return result;
     }
