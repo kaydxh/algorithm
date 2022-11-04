@@ -51,7 +51,7 @@ void mergeSort(int* a, int* b, int left, int right) {
         return;
     }
 
-    //注意这里是if不是while, 因此内部递归了
+    //注意这里是if不是while, 因为内部递归了
     if (left < right) {
         int center = left + (right - left) / 2;
         mergeSort(a, b, left, center);
