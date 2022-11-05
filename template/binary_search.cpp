@@ -2,11 +2,12 @@
 #include <vector>
 using namespace std;
 /*
- * 二分搜索
+ * 二分搜索, 前提条件数组是有序的
  * 1. 定义left、right
  * while (left <= right) 注意有等号
  * 2. 计算middle位置，根据middle位置的值与targe大小，来进行范围缩小：
- * left = middle + 1 / right = middle - 1
+ * left = middle + 1; right = middle - 1
+ * 3. 时间复杂度：O(logn)
  */
 
 int binarySearch(vector<int> &nums, int target) {
