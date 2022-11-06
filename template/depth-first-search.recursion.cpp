@@ -8,6 +8,9 @@
  * 2. root->left == nullptr
  * 3. root->right == nullpptr
  * 4. 递归左子树、右子树
+ * 时间复杂度：O(n^2)
+ * 空间复杂度：O(n),
+ * 取决于递归调用的层数，递归调用的层数不超过n,n为二叉树的节点数
  */
 #include <iostream>
 #include <vector>
@@ -22,6 +25,7 @@ struct TreeNode {
 
 bool isBalanced(TreeNode *root) { return isBalancedHelp(root); }
 
+//自顶向下
 bool isBalancedHelp(TreeNode *root) {
     if (root == nullptr) {
         return true;
