@@ -10,7 +10,7 @@ using namespace std;
  * 3. 时间复杂度：O(logn)
  */
 
-int binarySearch(vector<int> &nums, int target) {
+int binarySearch(const vector<int> &nums, int target) {
     int n = nums.size();
     int left = 0;
     int right = n - 1;
