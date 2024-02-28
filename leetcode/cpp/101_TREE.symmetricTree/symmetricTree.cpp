@@ -23,6 +23,7 @@ But the following [1,2,2,null,3,null,3] is not:
    \   \
    3    3
 
+ 时间复杂度是 O(n)，空间复杂度是 O(n)
 */
 
 #include <iostream>
