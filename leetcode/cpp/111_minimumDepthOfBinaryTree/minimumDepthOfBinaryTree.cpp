@@ -39,6 +39,8 @@ class Solution {
      1. mindepth of binary tree must consider the case:
        left or right sub tree is empty, so the mindepth if not 0, but the depth
      of other sub tree which is not empty
+     时间复杂度：O(N)
+     空间复杂度：O(H)，其中 H 是树的高度。空间复杂度主要取决于递归时栈空间的开销，最坏情况下，树呈现链状，空间复杂度为 O(N)。平均情况下树的高度与节点数的对数正相关，空间复杂度为 O(logN)
 
      */
   int minDepth(TreeNode *root) {
