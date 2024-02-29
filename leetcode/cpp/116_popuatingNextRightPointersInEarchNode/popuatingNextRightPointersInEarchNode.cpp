@@ -43,6 +43,7 @@ The number of nodes in the given tree is less than 4096.
 */
 
 #include <iostream>
+#include <queue>
 using namespace std;
 
 class Node {
@@ -62,6 +63,41 @@ class Node {
 
 class Solution {
  public:
+#if 1
+  //树的层次遍历基于广度优先搜索
+  //时间复杂度：O(N)
+  //空间复杂度：O(N)
+  Node* connect(Node* root) {
+    if (nullptr == root) {
+      return nullptr;
+    }
+    std::queue<Node*> nodes;
+    nodes.push(root);
+
+    while(!nodes.empty()) {
+        int n = nodes.size();
+        Node* last = nullptr;
+        for (int i = 0; i < n; ++i) {
+            Node *node = nodes.front();
+            nodes.pop();
+            if (node->left) {
+                nodes.push(node->left);
+            }
+            if (node->right) {
+                nodes.push(node->right);
+            }
+            if (last) {
+                last->next= node;
+            }
+            last = node;
+        }
+    }
+
+    return root;
+  }
+#endif
+
+#if 0
   /*
   迭代：
   1. 使用pre保存每层的开始节点， cur为当前遍历的节点
@@ -96,6 +132,7 @@ class Solution {
 
     return root;
   }
+#endif
 };
 
 int main() {
